@@ -10,6 +10,35 @@ const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
 const retiradaLojaCheckbox = document.getElementById("retiradaLoja");
 
+function updateStatus() {
+  const statusElement = document.getElementById("date-span");
+
+  const brasiliaOffset = -3; 
+  const now = new Date();
+  const brasiliaTime = new Date(now.getTime() + brasiliaOffset * 60 * 60 * 1000);
+
+  const openHour = 18; 
+  const closeHour = 23; 
+
+  const currentHour = brasiliaTime.getHours();
+  
+  
+  if (currentHour >= openHour && currentHour < closeHour) {
+      statusElement.classList.remove("bg-red-600");
+      statusElement.classList.add("bg-green-600");
+      statusElement.innerHTML = `<span class="text-white font-medium bg-green-500 status-indicator px-4 py-1 rounded-lg mt-5">Aberto 18:00 às 23:00</span>`;
+  } else {
+      statusElement.classList.remove("bg-green-600");
+      statusElement.classList.add("bg-red-600");
+      statusElement.innerHTML = `<span class="text-white font-medium bg-red-500 status-indicator px-4 py-1 rounded-lg mt-5">Fechado até 18:00</span>`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", updateStatus);
+
+document.addEventListener("DOMContentLoaded", updateStatus);
+
+
 let cart = [];
 
 cartBtn.addEventListener("click", function() {
